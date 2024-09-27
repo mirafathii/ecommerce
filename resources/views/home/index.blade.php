@@ -36,7 +36,7 @@
     </div>
     <!-- /preload -->
     <div id="wrapper">
-        @include('home.top_bar')
+        {{-- @include('home.top_bar') --}}
         <!-- /Top Bar -->
         @include('home.header')
         <!-- /Header -->
@@ -106,7 +106,7 @@
     <!-- /modal find_size -->
 
 
-    @include('home.auto_popup')
+    {{-- @include('home.auto_popup') --}}
     <!-- /auto popup  -->
 
 
