@@ -10,11 +10,11 @@
                     <form  method="POST" action="{{ route('login') }}" accept-charset="utf-8">
                         @csrf
                         <div class="tf-field style-1">
-                            <input class="tf-field-input tf-input" placeholder=" " type="email"  name="">
+                            <input class="tf-field-input tf-input" placeholder=" " type="email"  name="email">
                             <label class="tf-field-label" for="">Email *</label>
                         </div>
                         <div class="tf-field style-1">
-                            <input class="tf-field-input tf-input" placeholder=" " type="password"  name="">
+                            <input class="tf-field-input tf-input" placeholder=" " type="password"  name="password">
                             <label class="tf-field-label" for="">Password *</label>
                         </div>
                         {{-- <div>
@@ -76,17 +76,22 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="tf-field style-1">
-                            <input class="tf-field-input tf-input" placeholder=" " type="text"  name="">
+                            <input class="tf-field-input tf-input" placeholder=" " type="text"  name="name">
                             <label class="tf-field-label" for="">Name</label>
                         </div>
                         <div class="tf-field style-1">
-                            <input class="tf-field-input tf-input" placeholder=" " type="email"  name="">
+                            <input class="tf-field-input tf-input" placeholder=" " type="email"  name="email">
                             <label class="tf-field-label" for="">Email *</label>
                         </div>
                         <div class="tf-field style-1">
-                            <input class="tf-field-input tf-input" placeholder=" " type="password"  name="">
+                            <input class="tf-field-input tf-input" placeholder=" " type="password"  name="password">
                             <label class="tf-field-label" for="">Password *</label>
                         </div>
+                        <div class="tf-field style-1">
+                            <input class="tf-field-input tf-input" placeholder=" " type="password" name="password_confirmation">
+                            <label class="tf-field-label" for="password_confirmation">Confirm Password *</label>
+                        </div>
+                        
                         <div class="bottom"> 
                             <div class="w-100">
                                 <button type="submit" class="tf-btn btn-fill animate-hover-btn radius-3 w-100 justify-content-center"><span>Register</span></button>
