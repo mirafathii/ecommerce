@@ -6,26 +6,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Metoxi | Bootstrap 5 Admin Dashboard Template</title>
+  <title>Admin - Edit Category</title>
   <!--favicon-->
 	<link rel="icon" href="assets/images/favicon-32x32.png" type="image/png">
 
   <!--plugins-->
   <link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="assets/plugins/metismenu/metisMenu.min.css">
-  <link rel="stylesheet" type="text/css" href="assets/plugins/metismenu/mm-vertical.css">
-  <link rel="stylesheet" type="text/css" href="assets/plugins/simplebar/css/simplebar.css">
+  <link rel="stylesheet" type="text/css" href="/assets/plugins/metismenu/metisMenu.min.css">
+  <link rel="stylesheet" type="text/css" href="/assets/plugins/metismenu/mm-vertical.css">
+  <link rel="stylesheet" type="text/css" href="/assets/plugins/simplebar/css/simplebar.css">
   <!--bootstrap css-->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
   <!--main css-->
-  <link href="assets/css/bootstrap-extended.css" rel="stylesheet">
-  <link href="sass/main.css" rel="stylesheet">
-  <link href="sass/dark-theme.css" rel="stylesheet">
-  <link href="sass/semi-dark.css" rel="stylesheet">
-  <link href="sass/bordered-theme.css" rel="stylesheet">
-  <link href="sass/responsive.css" rel="stylesheet">
+  <link href="/assets/css/bootstrap-extended.css" rel="stylesheet">
+  <link href="/sass/main.css" rel="stylesheet">
+  <link href="/sass/dark-theme.css" rel="stylesheet">
+  <link href="/sass/semi-dark.css" rel="stylesheet">
+  <link href="/sass/bordered-theme.css" rel="stylesheet">
+  <link href="/sass/responsive.css" rel="stylesheet">
 
 </head>
 
@@ -37,9 +37,39 @@
 
   @include('parts.sidebar')
 <!--end sidebar-->
+  
 
+  {{-- MAIN CONTENT START --}}
 
-{{-- @include('parts.main_wrapper') --}}
+  <main class="main-wrapper">
+    <div class="main-content">
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- Add Category Form -->
+            <div class="card mb-3">
+              <div class="card-header">
+                <h5>Edit Category</h5>
+              </div>
+              <div class="card-body">
+                <form action="{{ route('category.update', $category->id) }}" method="POST" class="d-flex">
+                  @csrf
+                  <div class="me-2 flex-grow-1">
+                    <input type="text" name="category_name" id="categoryName" value="{{ old('category_name', $category->category_name) }}"
+                    class="form-control" placeholder="Enter category name" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Update Category</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  {{-- MAIN CONTENT END --}}
+
   <!--end main wrapper-->
 
   <!--start overlay-->

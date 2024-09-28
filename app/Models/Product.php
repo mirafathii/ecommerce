@@ -9,4 +9,10 @@ class Product extends Model
 {
     use HasFactory;
     protected $guard = [''];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }
