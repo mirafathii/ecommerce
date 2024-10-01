@@ -42,21 +42,21 @@
         <!-- /Header -->
         @include('home.slider')
         <!-- /Slider -->
-        @include('home.marquee')
+        {{-- @include('home.marquee') --}}
         <!-- /Marquee -->
-        @include('home.categories')
+        {{-- @include('home.categories') --}}
         <!-- /Categories -->
         @include('home.seller')
         <!-- /Seller -->
-        @include('home.lookbook')
+        {{-- @include('home.lookbook') --}}
         <!-- /Lookbook -->
-        @include('home.testimonial')
+        {{-- @include('home.testimonial') --}}
         <!-- /Testimonial -->
         @include('home.brand')
         <!-- /brand -->
-        @include('home.shop_gram')
+        {{-- @include('home.shop_gram') --}}
         <!-- /Shop Gram -->
-        @include('home.icon_box')
+        {{-- @include('home.icon_box') --}}
         <!-- /Icon box -->
         @include('home.footer')
         <!-- /Footer -->

@@ -34,14 +34,6 @@ Route::post('/delete_category/{id}',[CategoryController::class,'delete_category'
 
 
 // products routes
-// Route::get('/view_product',[ProductController::class,'view_product'])->name('products.view');
-// Route::post('/add_product',[ProductController::class,'add_product']);
-// Route::get('/show_product',[ProductController::class,'show_product'])->name('products.show');
-// Route::get('/delete_product/{id}',[ProductController::class,'delete_product'])->name('product.delete');
-// Route::get('/update_product/{id}',[ProductController::class,'edit_product'])->name('product.edit');
-// Route::post('/update_product_confirm/{id}',[ProductController::class,'update_product_confirm'])->name('products.update');
-// Route::get('/product_details/{id}', [ProductController::class,'product_details']);
-
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
