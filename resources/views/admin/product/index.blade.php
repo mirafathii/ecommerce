@@ -63,7 +63,7 @@
                       <th>Category</th>
                       <th>Price</th>
                       <th>Quantity</th>
-                      {{-- <th>Image</th> --}}
+                      <th>Image</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -77,13 +77,13 @@
                         <td>{{ $product->category->category_name ?? 'N/A' }}</td> 
                         <td>${{ number_format($product->price, 2) }}</td>
                         <td>{{ $product->quantity }}</td>
-                        {{-- <td>
+                        <td>
                           @if($product->image)
-                            <img src="{{ asset('images/' . $product->image) }}" alt="Product Image" width="50" height="50">
+                            <img src="/images/{{$product->image}}" alt="Product Image" width="50" height="50">
                           @else
                             N/A
                           @endif
-                        </td> --}}
+                        </td>
                         <td>
                           <a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a>
                           <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline-block;">

@@ -19,8 +19,10 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('admin.product.create');
+        $categories = Category::get();
+        return view('admin.product.create', compact('categories'));
     }
+
 
     public function store(Request $request)
     {
@@ -28,8 +30,10 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id', // category_id is required
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
+            'discount' => 'nullable|numeric',
             'image' => 'nullable|image|max:2048',
         ]);
 
@@ -39,6 +43,8 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
+        $product->discount = $request->discount;
+        $product->category_id = $request->category_id;// Assign category_id here
 
         // Handle file upload if an image is uploaded
         if ($request->hasFile('image')) {
@@ -53,58 +59,48 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('message', 'Product Added Successfully');
     }
 
-    // add products
-    // public function add_product(Request $request){
-    //     $image = $request->image;
-    //     $image_name = time() . '.' . $image->getClientOriginalExtension();
-    //     $request->image->move('product', $image_name);
-    
-    //     DB::table('products')->insert([
-    //         'title' => $request->title,
-    //         'description' => $request->description,
-    //         'price' => $request->price,
-    //         'quantity' => $request->quantity,
-    //         'discount_price' => $request->discount_price,
-    //         'category' => $request->category,
-    //         'image' => $image_name,
-    //         'created_at' => now(),  // optional, if you want to track creation time
-    //         'updated_at' => now()   // optional, if you want to track update time
-    //     ]);
-    
-    //     return redirect()->back()->with('message', 'Product Added Successfully');
-    // }
-
         //delete product
-       public function delete_product($id){
+       public function destroy($id){
         $product=Product::find($id);
         $product->delete();
         return redirect()->back()->with('message','product Deleted successfully');
        }
     
-       public function edit($id)
-{
-    $product = Product::findOrFail($id); // Find the product by ID
-    return view('products.edit', compact('product'));
+       public function edit($id){
+        $categories = Category::get();
+        $product = Product::findOrFail($id); // Find the product by ID
+        return view('admin.product.edit', compact('product','categories'));
 }
 
 
-       public function update_product_confirm(Request $request, $id){
-        $product = Product::find($id);
-        $product->title=request()->title;
-        $product->description=request()->description;
-        $product->price=request()->price;
-        $product->quantity=request()->quantity;
-        $product->discount_price=request()->discount_price;
-        $product->category=request()->category;
-    
-        if(request()->hasFile('image')){
-            $image=$request->image;
-            $image_name=time().'.'.$image->getClientOriginalExtension();
-            $request->image->move('product',$image_name);
-            $product->image=$image_name;
+       public function update(Request $request, $id){
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id', // category_id is required
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:0',
+            'discount' => 'nullable|numeric',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        // Create a new product
+        $product = Product::findOrFail($id);
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->discount = $request->discount;
+        $product->category_id = $request->category_id;// Assign category_id here
+
+        // Handle file upload if an image is uploaded
+        if ($request->hasFile('image')) {
+            $fileName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(('images'), $fileName);
+            $product->image = $fileName;
         }
-    
+
         $product->save();
-        return redirect()->back()->with('message', 'Product updated successfully!');
+        return redirect()->route('products.index')->with('message', 'Product updated successfully!');
     }
 }
