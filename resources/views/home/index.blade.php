@@ -46,6 +46,7 @@
         <!-- /Marquee -->
         {{-- @include('home.categories') --}}
         <!-- /Categories -->
+        
         @include('home.seller')
         <!-- /Seller -->
         {{-- @include('home.lookbook') --}}

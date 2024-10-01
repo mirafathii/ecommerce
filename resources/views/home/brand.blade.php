@@ -8,31 +8,6 @@
                                     <img class="lazyload" data-src="images/brand/brand-01.png" src="images/brand/brand-01.png" alt="image-brand">
                                 </div>
                             </div>
-                            <div class="swiper-slide">
-                                <div class="brand-item">
-                                    <img class="lazyload" data-src="images/brand/brand-02.png" src="images/brand/brand-02.png" alt="image-brand">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="brand-item">
-                                    <img class="lazyload" data-src="images/brand/brand-03.png" src="images/brand/brand-03.png" alt="image-brand">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="brand-item">
-                                    <img class="lazyload" data-src="images/brand/brand-04.png" src="images/brand/brand-04.png" alt="image-brand">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="brand-item">
-                                    <img class="lazyload" data-src="images/brand/brand-05.png" src="images/brand/brand-05.png" alt="image-brand">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="brand-item">
-                                    <img class="lazyload" data-src="images/brand/brand-06.png" src="images/brand/brand-06.png" alt="image-brand">
-                                </div>
-                            </div>
                     </div>
                 </div>
                 <div class="sw-dots style-2 sw-pagination-brand justify-content-center"></div>
