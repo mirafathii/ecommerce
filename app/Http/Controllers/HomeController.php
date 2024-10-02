@@ -41,16 +41,27 @@ class HomeController extends Controller
         return redirect()->back()->with('message', 'Product added to cart successfully');
     }
     
-    public function show_cart()
+    public function decrease_cart(Request $request, $id)
     {
-        $products=Product::all();
-        return view('home.index',compact('products'));
+        $userId = Auth::id(); // Assuming you're using authentication
+            // Check if product already in cart
+        $existingCartItem = Cart::where('user_id', $userId)->where('product_id', $id)->first();
+        
+        if ($existingCartItem) {
+            // Increase quantity if already exists
+            $existingCartItem->quantity -= 1;
+            $existingCartItem->save();
+        } else {
+            // Create new cart item
+            Cart::create([
+                'user_id' => $userId,
+                'product_id' => $id,
+                'quantity' => 1
+            ]);
+        }
+        return redirect()->back()->with('message', 'Product added to cart successfully');
     }
-    public function remove_cart()
-    {
-        $products=Product::all();
-        return view('home.index',compact('products'));
-    }
+
     public function cash_order()
     {
         $products=Product::all();

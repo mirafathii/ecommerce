@@ -9,63 +9,50 @@
                 <div class="wrap">
                     <div class="tf-mini-cart-wrap">
                         <div class="tf-mini-cart-main">
+                            {{-- products --}}
                             <div class="tf-mini-cart-sroll">
                                 <div class="tf-mini-cart-items">
+                                    @foreach($products as $product)
                                     <div class="tf-mini-cart-item">
                                         <div class="tf-mini-cart-image">
-                                            <a href="product-detail.html">
-                                                <img src="images/products/white-2.jpg" alt="">
-                                            </a>
+                                                <img src="images/{{$product->image}}" class="card-img-top" alt="{{ $product->name }}" style="height: 250px; object-fit: cover;">
                                         </div>
                                         <div class="tf-mini-cart-info">
-                                            <a class="title link" href="product-detail.html">T-shirt</a>
-                                            <div class="meta-variant">Light gray</div>
-                                            <div class="price fw-6">$25.00</div>
+                                            <a class="title link" href="product-detail.html">Category Name: {{$product->category->category_name}}</a>
+                                            <div class="meta-variant">Product Name: {{ $product->name }}</div>
+                                            <div class="price fw-6">Price per unit: {{ number_format($product->price, 2) }}$</div>
                                             <div class="tf-mini-cart-btns">
-                                                <div class="wg-quantity small">
-                                                    <span class="btn-quantity minus-btn">-</span>
-                                                    <input type="text" name="number" value="1">
-                                                    <span class="btn-quantity plus-btn">+</span>
+                                                <small class="text-dark">
+                                                    <strong>Quatity: </strong>{{}}
+                                                </small>
+                                                <div class="card-footer text-center">
+                                                    <form action="{{ route('carts.add', $product->id) }}" method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-dark btn-sm">+</button>
+                                                    </form>
                                                 </div>
-                                                <div class="tf-mini-cart-remove">Remove</div>
-                                            </div>
+                                                <div class="card-footer text-center">
+                                                    <form action="{{ route('carts.decrease', $product->id) }}" method="POST" style="display:inline-block;">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-dark btn-sm">-</button>
+                                                    </form>
+                                                </div>                            
+                                           </div>
                                         </div>
                                     </div>
-                                    <div class="tf-mini-cart-item">
-                                        <div class="tf-mini-cart-image">
-                                            <a href="product-detail.html">
-                                                <img src="images/products/white-3.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="tf-mini-cart-info">
-                                            <a class="title link" href="product-detail.html">Oversized Motif T-shirt</a>
-                                            <div class="price fw-6">$25.00</div>
-                                            <div class="tf-mini-cart-btns">
-                                                <div class="wg-quantity small">
-                                                    <span class="btn-quantity minus-btn">-</span>
-                                                    <input type="text" name="number" value="1">
-                                                    <span class="btn-quantity plus-btn">+</span>
-                                                </div>
-                                                <div class="tf-mini-cart-remove">Remove</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
-                        <div class="tf-mini-cart-bottom">
+                        {{-- totaal cost --}}
+                        {{-- <div class="tf-mini-cart-bottom">
                             <div class="tf-mini-cart-bottom-wrap">
                                 <div class="tf-cart-totals-discounts">
-                                    <div class="tf-cart-total">Subtotal</div>
+                                    <div class="tf-cart-total">totaal cost=</div>
                                     <div class="tf-totals-total-value fw-6">$49.99 USD</div>
                                 </div>
-                                <div class="tf-mini-cart-line"></div>
-                                <div class="tf-mini-cart-view-checkout">
-                                    <a href="view-cart.html" class="tf-btn btn-outline radius-3 link w-100 justify-content-center">View cart</a>
-                                    <a href="checkout.html" class="tf-btn btn-fill animate-hover-btn radius-3 w-100 justify-content-center"><span>Check out</span></a>
-                                </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="tf-mini-cart-tool-openable add-note">
                             <div class="overplay tf-mini-cart-tool-close"></div>
                             <div class="tf-mini-cart-tool-content">

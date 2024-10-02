@@ -49,8 +49,7 @@ Route::get('/product_details/{id}', [HomeController::class,'product_details'])->
 
 // cart routes
 Route::post('/add_cart/{id}',[HomeController::class,'add_cart'])->name('carts.add');
-Route::get('/show_cart',[HomeController::class,'show_cart'])->name('carts.show');
-Route::get('/remove_cart/{id}',[HomeController::class,'remove_cart'])->name('carts.destroy');
+Route::post('/remove_cart/{id}',[HomeController::class,'decrease_cart'])->name('carts.decrease');
 Route::get('/cash_order',[HomeController::class,'cash_order'])->name('carts.order');
 
 
