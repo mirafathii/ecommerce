@@ -593,7 +593,7 @@
         </li>
         
         @if(Auth::check())
-                        <li>
+            <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="btn btn-dark">LOG OUT</button>
@@ -610,7 +610,7 @@
         <li class="nav-cart">
             <a href="#shoppingCart" data-bs-toggle="modal" class="nav-icon-item">
                 <i class="icon icon-bag"></i>
-                <span class="count-box">0</span>
+                <span class="count-box">{{ sizeof($cartItems) }}</span>
             </a>
         </li>
     </ul>

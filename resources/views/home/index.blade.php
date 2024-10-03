@@ -21,6 +21,8 @@
    <link rel="stylesheet" href="css/animate.css">
    <link rel="stylesheet"type="text/css" href="css/styles.css"/>
 
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <!-- Favicon and Touch Icons  -->
     <link rel="shortcut icon" href="images/logo/favicon.png">
 <link rel="apple-touch-icon-precomposed" href="images/logo/favicon.png">
@@ -56,8 +58,6 @@
         @include('home.brand')
         <!-- /brand -->
         {{-- @include('home.shop_gram') --}}
-        <!-- /Shop Gram -->
-        {{-- @include('home.icon_box') --}}
         <!-- /Icon box -->
         @include('home.footer')
         <!-- /Footer -->
@@ -122,6 +122,21 @@
     <script type="text/javascript" src="js/wow.min.js"></script>
     <script type="text/javascript" src="js/multiple-modal.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Toastr Notification Script -->
+    <script>
+        $(document).ready(function() {
+            @if(Session::has('message'))
+                toastr.success("{{ Session::get('message') }}");
+            @elseif(Session::has('error'))
+                toastr.error("{{ Session::get('error') }}");
+            @endif
+        });
+    </script>
+
+
+
 </body>
 
 

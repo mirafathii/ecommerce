@@ -12,47 +12,71 @@
                             {{-- products --}}
                             <div class="tf-mini-cart-sroll">
                                 <div class="tf-mini-cart-items">
-                                    @foreach($products as $product)
-                                    <div class="tf-mini-cart-item">
-                                        <div class="tf-mini-cart-image">
-                                                <img src="images/{{$product->image}}" class="card-img-top" alt="{{ $product->name }}" style="height: 250px; object-fit: cover;">
-                                        </div>
-                                        <div class="tf-mini-cart-info">
-                                            <a class="title link" href="product-detail.html">Category Name: {{$product->category->category_name}}</a>
-                                            <div class="meta-variant">Product Name: {{ $product->name }}</div>
-                                            <div class="price fw-6">Price per unit: {{ number_format($product->price, 2) }}$</div>
-                                            <div class="tf-mini-cart-btns">
-                                                <small class="text-dark">
-                                                    <strong>Quatity: </strong>{{}}
-                                                </small>
-                                                <div class="card-footer text-center">
-                                                    <form action="{{ route('carts.add', $product->id) }}" method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-dark btn-sm">+</button>
-                                                    </form>
+                                    @php
+                                        $totalCost = 0; // Initialize total cost
+                                        $totalDiscount = 0; // Initialize total discount
+                                    @endphp
+                                    @foreach($cartItems as $cartItem)
+                                        <div class="tf-mini-cart-item">
+                                            <div class="tf-mini-cart-image">
+                                                <img src="images/{{$cartItem->product->image}}" class="card-img-top" alt="{{ $cartItem->product->name }}" style="height: 250px; object-fit: cover;">
+                                            </div>
+                                            <div class="tf-mini-cart-info">
+                                                <a class="title link" href="product-detail.html">Category Name: {{$cartItem->product->category->category_name}}</a>
+                                                <div class="meta-variant">Product Name: {{ $cartItem->product->name }}</div>
+                                                <div class="price fw-6">Price per unit: {{ number_format($cartItem->product->price, 2) }}$</div>
+                                                <div class="tf-mini-cart-btns">
+                                                    <small class="text-dark">
+                                                        <strong>Quantity: </strong>{{ $cartItem->quantity }}
+                                                    </small>
+                                                    <div class="card-footer text-center">
+                                                        <form action="{{ route('carts.add', $cartItem->product->id) }}" method="POST" style="display:inline-block;">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-dark btn-sm">+</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="card-footer text-center">
+                                                        <form action="{{ route('carts.decrease', $cartItem->product->id) }}" method="POST" style="display:inline-block;">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-dark btn-sm">-</button>
+                                                        </form>
+                                                    </div>                            
                                                 </div>
-                                                <div class="card-footer text-center">
-                                                    <form action="{{ route('carts.decrease', $product->id) }}" method="POST" style="display:inline-block;">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-dark btn-sm">-</button>
-                                                    </form>
-                                                </div>                            
-                                           </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                        @php
+                                            // Calculate the total cost for the cart
+                                            $productTotalCost = $cartItem->product->price * $cartItem->quantity; // Total cost for this item
+                                            $totalCost += $productTotalCost; // Aggregate total cost
+                        
+                                            // Calculate discount for this item and aggregate it
+                                            $itemDiscount = ($cartItem->product->discount / 100) * $productTotalCost; // Discount for this item
+                                            $totalDiscount += $itemDiscount; // Aggregate total discount
+                                        @endphp
                                     @endforeach
                                 </div>
                             </div>
                         </div>
-                        {{-- totaal cost --}}
-                        {{-- <div class="tf-mini-cart-bottom">
+                        
+                        {{-- total cost --}}
+                        <div class="tf-mini-cart-bottom">
                             <div class="tf-mini-cart-bottom-wrap">
                                 <div class="tf-cart-totals-discounts">
-                                    <div class="tf-cart-total">totaal cost=</div>
-                                    <div class="tf-totals-total-value fw-6">$49.99 USD</div>
+                                    <div class="tf-cart-total">Total Cost:</div>
+                                    <div class="tf-totals-total-value fw-6">${{ number_format($totalCost, 2) }} USD</div>
+                                </div>
+                                <div class="tf-cart-totals-discounts">
+                                    <div class="tf-cart-total">Total Discount:</div>
+                                    <div class="tf-totals-total-value fw-6">${{ number_format($totalDiscount, 2) }} USD</div>
+                                </div>
+                                <div class="tf-cart-totals-discounts">
+                                    <div class="tf-cart-total">Total Cost After Discount:</div>
+                                    <div class="tf-totals-total-value fw-6">${{ number_format($totalCost - $totalDiscount, 2) }} USD</div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
+                        
+                        
                         <div class="tf-mini-cart-tool-openable add-note">
                             <div class="overplay tf-mini-cart-tool-close"></div>
                             <div class="tf-mini-cart-tool-content">

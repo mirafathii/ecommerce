@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Auth\AuthenticationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -24,11 +25,19 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-
+        // Attempt to authenticate the user
+        $flag = $request->authenticate();
+        
+        // If successful, regenerate the session
         $request->session()->regenerate();
 
-        return redirect()->route('home.index');
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.admindashboard')->with('message', 'Login successful!');
+        } else {
+            return redirect()->route('home.index')->with('message', 'Login successful!');
+        }
     }
 
     /**
