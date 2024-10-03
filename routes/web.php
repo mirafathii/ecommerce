@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/home', [HomeController::class,'index'])->name('home.index');
 
-Route::middleware(['checkAuthorization', 'admin'])->group(function () {
+Route::middleware(['checkAuthorization' , 'isAdmin'])->group(function () {
     Route::get('/admindashboard', [AdminController::class,'index'])->name('admin.admindashboard');
     
     // category routes
